@@ -25,7 +25,7 @@ class TorrentManager(Database):
     async def delete_torrents(self, data: Bangumi, client: DownloadClient):
         hash_list = await self.__match_torrents_list(data)
         if hash_list:
-            await client.delete_torrent(hash_list)
+            await client.delete_torrent("|".join(hash_list))
             logger.info(f"Delete rule and torrents for {data.official_title}")
             return ResponseModel(
                 status_code=200,
